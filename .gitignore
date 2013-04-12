@@ -1,0 +1,5 @@
+*.swp
+rpmbuild/BUILD
+rpmbuild/SRPMS
+rpmbuild/RPMS
+rpmbuild/SOURCES

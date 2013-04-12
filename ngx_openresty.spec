@@ -1,0 +1,1 @@
+rpmbuild/SPECS/ngx_openresty.spec
