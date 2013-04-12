@@ -1,0 +1,3 @@
+[submodule "ngx_openresty"]
+	path = ngx_openresty
+	url = https://github.com/agentzh/ngx_openresty.git
