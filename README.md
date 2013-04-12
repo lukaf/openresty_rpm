@@ -1,4 +1,5 @@
 #### RPM building environment for openresty
 
 TODO:
-create a submodule with current tree of the official repo
+* create debug version
+* automate creation of bundles - tag based
