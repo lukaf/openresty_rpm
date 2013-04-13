@@ -1,5 +1,8 @@
 %define openresty_prefix %{?resty_prefix}%{?!resty_prefix:/usr/local/openresty}
 
+# conditionals --with and --without
+%bcond_with debug
+
 Name: ngx_openresty
 Version: 1.2.7.5
 Release: 1
@@ -45,7 +48,8 @@ best Nginx core from the official Nginx team.
 %build
 ./configure \
     --with-luajit \
-    --prefix=%{openresty_prefix}
+    --prefix=%{openresty_prefix} \
+    %{?_with_debug}
 
 %{__make} -j 2 %{?_smp_mflags}
 
