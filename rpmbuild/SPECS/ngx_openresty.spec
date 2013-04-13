@@ -1,7 +1,7 @@
-%define openresty_prefix /usr/local/openresty
+%define openresty_prefix %{?resty_prefix}%{?!resty_prefix:/usr/local/openresty}
 
 Name: ngx_openresty
-Version: 1.2.4.14
+Version: 1.2.7.5
 Release: 1
 Summary: A fully-fledged web application server built using Nginx and 3rd-party modules.
 
@@ -47,22 +47,22 @@ best Nginx core from the official Nginx team.
     --with-luajit \
     --prefix=%{openresty_prefix}
 
-make %{?_smp_mflags}
+%{__make} -j 2 %{?_smp_mflags}
 
 
 %install
-%{__rm} -rf ${RPM_BUILD_ROOT}
-%{__make} -j 2 install DESTDIR=${RPM_BUILD_ROOT}
+%{__rm} -rf %{buildroot}
+%{__make} -j 2 install DESTDIR=%{buildroot}
 
-find ${RPM_BUILD_ROOT}%{openresty_prefix} -printf "%y %%%%attr(0%m,-,-) %p\n" | \
+find %{buildroot}%{openresty_prefix} -printf "%y %%%%attr(0%m,-,-) %p\n" | \
 sed -e 's/^d /%%dir /' \
     -e 's/^f \(.*\)\.conf$/%%config(noreplace) \1.conf/' \
     -e 's/^[^d] //' \
-    -e "s#${RPM_BUILD_ROOT}##" > %{_tmppath}/%{name}-%{version}-%{release}.f
+    -e "s#%{buildroot}##" > %{_tmppath}/%{name}-%{version}-%{release}.f
 
 
 %clean
-%{__rm} -rf ${RPM_BUILD_ROOT}
+%{__rm} -rf %{buildroot}
 %{__rm} -r %{_tmppath}/%{name}-%{version}-%{release}.f
 
 
