@@ -2,6 +2,7 @@
 
 By default ngx\_openresty is installed in /usr/local/openresty. To change
 prefix when building package, set the resty\_prefix variable.
+
 Example: set prefix to /opt/openresty:
 
     $ rpmbuild -D 'resty_prefix /opt/openresty' -ba ngx_openresty.spec
@@ -16,4 +17,5 @@ Combined:
 
 
 TODO:
+
 * automate creation of bundles - tag based
