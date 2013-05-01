@@ -15,7 +15,8 @@ Combined:
 
     $ rpmbuild -D 'resty_prefix /opt/resty/debug' --with debug -ba ngx_openresty.spec
 
-Or using a build script (version is mandatory!):
+
+*Or using a build script (version is mandatory!):*
 
 Set prefix to /opt/openresty:
 
@@ -36,10 +37,23 @@ List available versions (tags):
 
 Build a source bundle to create RPM from, change prefix and enable debugging:
 
-    $ buidl.sh -b -p /usr/local/resty -d -v 1.2.8.1
+    $ build.sh -b -p /usr/local/resty -d -v 1.2.8.1
 
 
 NOTE: last two options require an updated submodule:
 
     $ cd ngx_openresty
     $ git pull
+
+Help:
+
+    $ build.sh -h
+    Usage: build.sh -v version [-p prefix] [-d] [-b] [-l] [-h]
+    -v version        Selection version number based on tag (see -l).
+    -p prefix         Selection prefix (default /usr/local/openresty).
+    -d                Use --with-debug when building Nginx.
+    -b                Build source bundle.
+    -l                List all available tags (for use with -v)
+    -h                Display this message
+
+
