@@ -1,11 +1,12 @@
 %define openresty_prefix %{?resty_prefix}%{?!resty_prefix:/usr/local/openresty}
+%define openresty_release %{?resty_release}%{?!resty_release:1}
 
 # conditionals --with and --without
 %bcond_with debug
 
 Name: ngx_openresty
 Version: %{openresty_version}
-Release: %{?openresty_release}%{?!openresty_release:1}
+Release: %{openresty_release}
 Summary: A fully-fledged web application server built using Nginx and 3rd-party modules.
 
 License: MIT and BSD 2-clause license and BSD 3-clause license

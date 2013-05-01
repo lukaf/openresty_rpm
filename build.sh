@@ -8,10 +8,11 @@
 # -h                Display this message.
 
 usage() {
-    echo "Usage: ${0##*/} -v version [-p prefix] [-d] -[-h] [-l]"
+    echo "Usage: ${0##*/} -v version [-p prefix] [-d] [-b] [-l] [-h]"
     echo "-v version        Selection version number based on tag (see -l)."
     echo "-p prefix         Selection prefix (default /usr/local/openresty)."
     echo "-d                Use --with-debug when building Nginx."
+    echo "-b                Build source bundle."
     echo "-l                List all available tags (for use with -v)"
     echo "-h                Display this message"
     exit 1
@@ -38,8 +39,9 @@ commit_history() {
 }
 
 TEMPLATE_SPEC="rpmbuild/SPECS/ngx_openresty.spec"
+SOURCE_DIR="rpmbuild/SOURCES"
 
-while getopts ":v:p:dlh" OPT; do
+while getopts ":v:p:dblh" OPT; do
     case "${OPT}" in
         v)
             VERSION=${OPTARG}
@@ -50,6 +52,9 @@ while getopts ":v:p:dlh" OPT; do
             ;;
         d)
             RPMBUILD_OPTS="${RPMBUILD_OPTS} --with debug"
+            ;;
+        b)
+            SOURCE_BUILD=1
             ;;
         l)
             list_tags
@@ -79,7 +84,14 @@ cp ${TEMPLATE_SPEC} ${VERSION_SPEC}
 # output changelog
 commit_history >> ${VERSION_SPEC}
 
+if [ ${SOURCE_BUILD} ]; then
+    (cd ngx_openresty && make && \
+        mv ngx_openresty-${VERSION}.tar.gz ../${SOURCE_DIR}/.) || \
+        die "Building source bundle failed."
+fi
+
+
 # cleanup
 (cd ngx_openresty && git checkout master && git branch -d v${VERSION})
 
-rpmbuild ${RPMBUILD_OPTS} -ba ${VERSION_SPEC}
+eval QA_RPATHS=$[ 0x0002 ] rpmbuild ${RPMBUILD_OPTS} -ba ${VERSION_SPEC}
