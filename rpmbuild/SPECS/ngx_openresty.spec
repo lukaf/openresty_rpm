@@ -18,6 +18,10 @@ BuildRequires: zlib-devel
 BuildRequires: openssl-devel
 BuildRequires: perl
 
+Requires: pcre-devel
+Requires: zlib-devel
+Requires: openssl-devel
+
 
 %description
 OpenResty (aka. ngx_openresty) is a full-fledged web application server by
