@@ -1,0 +1,6 @@
+### Centos & Fedora
+* Build VM
+* Install VM
+
+### General
+* add %{dist} to _build_name_fmt to distinguish between Fedora and CentOS
