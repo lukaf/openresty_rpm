@@ -4,3 +4,5 @@ rpmbuild/SRPMS
 rpmbuild/RPMS
 rpmbuild/SOURCES
 rpmbuild/BUILDROOT
+rpmbuild/SPECS
+!rpmbuild/SPECS/ngx_openresty.spec
