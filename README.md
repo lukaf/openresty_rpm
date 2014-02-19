@@ -24,10 +24,10 @@ Build a source bundle to create RPM from, change prefix and enable debugging:
     $ build.sh -b -p /usr/local/resty -d -v 1.2.8.1
 
 
-NOTE: last two options require an updated submodule:
+NOTE: Updated submodule is required:
 
-    $ cd ngx_openresty
-    $ git pull
+    $ git submodule update --init --recursive
+    $ git submodule foreach git pull origin master
 
 Help:
 
