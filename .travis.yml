@@ -6,6 +6,7 @@ git:
     submodules: false
 
 before_script:
+    - sudo apt-get -y update
     - sudo apt-get -y install rpm
     - git submodule update --init --recursive
     - git submodule foreach git pull origin master
