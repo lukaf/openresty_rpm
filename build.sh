@@ -90,10 +90,10 @@ if [ ${SOURCE_BUILD} ]; then
         die "Building source bundle failed."
 fi
 
-ls -l ${SOURCE_DIR}
-
-
 # cleanup
 (cd ngx_openresty && git checkout master && git branch -d v${VERSION})
+
+pwd
+ls -l ${SOURCE_DIR}
 
 eval QA_RPATHS=$[ 0x0002 ] rpmbuild ${RPMBUILD_OPTS} -ba ${VERSION_SPEC}
