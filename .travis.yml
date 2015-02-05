@@ -1,8 +1,11 @@
+language: c
+
 script: ./build.sh -b -p /opt/openresty -v 1.7.7.1
 
 git:
     submodules: false
 
 before_script:
+    - apt-get -y install rpm
     - git submodule update --init --recursive
     - git submodule foreach git pull origin master
