@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # build.sh -v version [-p prefix] [-d] [-h] [-l]
 # -v version        Select version number based on tag.

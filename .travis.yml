@@ -1,4 +1,4 @@
-script: "sh build.sh -b -p /opt/openresty -v 1.7.7.1"
+script: ./build.sh -b -p /opt/openresty -v 1.7.7.1
 
 git:
     submodules: false
