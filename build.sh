@@ -93,7 +93,4 @@ fi
 # cleanup
 (cd ngx_openresty && git checkout master && git branch -d v${VERSION})
 
-pwd
-ls -l ${SOURCE_DIR}
-
-eval QA_RPATHS=$[ 0x0002 ] rpmbuild ${RPMBUILD_OPTS} -ba ${VERSION_SPEC}
+eval QA_RPATHS=$[ 0x0002 ] rpmbuild --define '_topdir %(pwd)' ${RPMBUILD_OPTS} -ba ${VERSION_SPEC}
