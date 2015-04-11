@@ -1,13 +1,10 @@
-box: lukaf/centos7:latest
+box: lukaf/rpmbuild
 
 build:
     steps:
         - script:
             name: build rpm
             code: |
-                yum makecache fast
-                # build dependencies
-                yum -y install rpm-build wget rsync tar git make gcc patch
                 # openresty build dependencies
                 yum -y install pcre-devel zlib-devel openssl-devel perl
                 # code is mounter ro inside the container
