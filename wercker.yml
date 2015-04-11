@@ -1,0 +1,10 @@
+box: lukaf/rpmbuild:latest
+
+build:
+    steps:
+        - script:
+            name: build rpm
+            code: |
+                pwd
+                find /
+
