@@ -1,11 +1,19 @@
-box: lukaf/rpmbuild:latest
+box: lukaf/centos7:latest
 
 build:
     steps:
         - script:
             name: build rpm
             code: |
-                cd /mnt/source
+                yum makecache fast
+                # build dependencies
+                yum -y install rpm-build wget rsync tar git make gcc patch
+                # openresty build dependencies
+                yum -y install pcre-devel zlib-devel openssl-devel perl
+                # code is mounter ro inside the container
+                mkdir -p /tmp/src
+                rsync -auh /mnt/source/ /tmp/src/
+                cd /tmp/src
                 git submodule update --init --recursive
                 git submodule foreach git pull origin master
                 ./build.sh -b -v 1.7.7.2
