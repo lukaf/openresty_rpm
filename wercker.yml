@@ -5,6 +5,8 @@ build:
         - script:
             name: build rpm
             code: |
-                pwd
-                find /
+                cd /mnt/source
+                git submodule update --init --recursive
+                git submodule foreach git pull origin master
+                ./build.sh -b -v 1.7.7.2
 
