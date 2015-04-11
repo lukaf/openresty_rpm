@@ -5,9 +5,7 @@ build:
         - script:
             name: build rpm
             code: |
-                # openresty build dependencies
-                yum -y install pcre-devel zlib-devel openssl-devel perl
-                # code is mounter ro inside the container
+                # code is mounted ro inside the container
                 mkdir -p /tmp/src
                 rsync -auh /mnt/source/ /tmp/src/
                 cd /tmp/src
