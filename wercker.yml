@@ -6,6 +6,7 @@ build:
       name: build rpm
       code: |
         # code is mounted ro inside the container
+        rm -fr /tmp/src
         mkdir -p /tmp/src
         rsync -auh /mnt/source/ /tmp/src/
         cd /tmp/src
