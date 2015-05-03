@@ -1,15 +1,25 @@
 box: lukaf/rpmbuild
 
 build:
-    steps:
-        - script:
-            name: build rpm
-            code: |
-                # code is mounted ro inside the container
-                mkdir -p /tmp/src
-                rsync -auh /mnt/source/ /tmp/src/
-                cd /tmp/src
-                git submodule update --init --recursive
-                git submodule foreach git pull origin master
-                ./build.sh -b -v 1.7.7.2
+  steps:
+    - script:
+      name: build rpm
+      code: |
+        # code is mounted ro inside the container
+        mkdir -p /tmp/src
+        rsync -auh /mnt/source/ /tmp/src/
+        cd /tmp/src
+        git submodule update --init --recursive
+        git submodule foreach git pull origin master
+        ./build.sh -b -v 1.7.7.2
 
+deploy:
+  steps:
+    - github-create-release:
+      token: $GITHUB_TOKEN
+      tag: $RELEASE_VERSION
+      title: Openresty $RELEASE_VERSION
+      draft: true
+    - github-upload-asset:
+      token: $GITHUB_TOKEN
+      file: bla.rpm
