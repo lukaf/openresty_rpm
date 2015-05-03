@@ -11,15 +11,15 @@ build:
         cd /tmp/src
         git submodule update --init --recursive
         git submodule foreach git pull origin master
-        ./build.sh -b -v 1.7.7.2
+        ./build.sh -b -v $VERSION
 
 deploy:
   steps:
     - github-create-release:
       token: $GITHUB_TOKEN
-      tag: $RELEASE_VERSION
-      title: Openresty $RELEASE_VERSION
+      tag: $VERSION
+      title: Openresty $VERSION
       draft: true
     - github-upload-asset:
       token: $GITHUB_TOKEN
-      file: bla.rpm
+      file: /tmp/src/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-1.x86_64.rpm
