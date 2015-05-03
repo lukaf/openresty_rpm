@@ -5,11 +5,6 @@ build:
     - script:
       name: build rpm
       code: |
-        # code is mounted ro inside the container
-        rm -fr /src
-        mkdir -p /src
-        rsync -auh /mnt/source/ /src/
-        cd /src
         git submodule update --init --recursive
         git submodule foreach git pull origin master
         ./build.sh -b -v $(cat VERSION)
@@ -27,4 +22,4 @@ deploy:
       draft: true
     - github-upload-asset:
       token: $GITHUB_TOKEN
-      file: /src/rpmbuild/RPMS/x86_64/ngx_openresty-${RELEASE_VERSION}-1.x86_64.rpm
+      file: rpmbuild/RPMS/x86_64/ngx_openresty-${RELEASE_VERSION}-1.x86_64.rpm
