@@ -1,5 +1,7 @@
 #### RPM building environment for openresty
 
+[![wercker status](https://app.wercker.com/status/980d0b0797bbb998a8c8151111022a92/s/master "wercker status")](https://app.wercker.com/project/bykey/980d0b0797bbb998a8c8151111022a92)
+
 *Using a build script (version is mandatory!):*
 
 Set prefix to /opt/openresty:
