@@ -5,6 +5,9 @@ build:
     - script:
       name: build rpm
       code: |
+        pwd
+        mkdir hello
+        perl -MCwd -e'print Cwd::abs_path(shift)' $(dirname -- "$0")/..
         git submodule update --init --recursive
         git submodule foreach git pull origin master
         ./build.sh -b -v $(cat VERSION)

@@ -73,9 +73,6 @@ if [ -z "${VERSION}" ]; then
     usage
 fi
 
-pwd
-mkdir testing
-
 VERSION_SPEC=${TEMPLATE_SPEC/\.spec/-${VERSION}.spec}
 
 # create branch from tag
