@@ -5,9 +5,6 @@ build:
     - script:
       name: build rpm
       code: |
-        ls -ld /pipeline/source
-        ls -ld /pipeline
-        mount
         git submodule update --init --recursive
         git submodule foreach git pull origin master
         ./build.sh -b -v $(cat VERSION)
