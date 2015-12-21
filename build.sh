@@ -85,7 +85,8 @@ cp ${TEMPLATE_SPEC} ${VERSION_SPEC}
 commit_history >> ${VERSION_SPEC}
 
 if [ ${SOURCE_BUILD} ]; then
-    (cd ngx_openresty && make && \
+    (cd ngx_openresty && \
+        sed -i -e 's/^markdown2pod/#markdown2pod/' -e 's/^unix2dos/#unix2dos/' util/mirror-tarballs && make && \
         mv ngx_openresty-${VERSION}.tar.gz ../${SOURCE_DIR}/.) || \
         die "Building source bundle failed."
 fi
