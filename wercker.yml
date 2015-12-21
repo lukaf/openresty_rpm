@@ -5,17 +5,8 @@ build:
     - script:
       name: build rpm
       code: |
-        id
-        pwd
-        cd ..
-        pwd
-        cd ..
-        pwd
-        cd ..
-        pwd
-        mkdir hello
-        perl -MCwd -e'print Cwd::abs_path(shift)' $(dirname -- "$0")/..
-        echo
+        ls -ld /pipeline/source
+        ls -ld /pipeline
         mount
         git submodule update --init --recursive
         git submodule foreach git pull origin master
