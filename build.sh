@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+set -u
+
 # build.sh -v version [-p prefix] [-d] [-h] [-l]
 # -v version        Select version number based on tag.
 # -p prefix         Select prefix (default /usr/local/openresty).
@@ -38,8 +41,17 @@ commit_history() {
         sed -r 's/([0-9]+) [0-9]+:[0-9]+:[0-9]+ /\1 /')
 }
 
+cleanup() {
+    (cd ngx_openresty && git checkout master && git branch -d v${VERSION})
+}
+
+trap "cleanup" EXIT ERR INT
+
 TEMPLATE_SPEC="rpmbuild/SPECS/ngx_openresty.spec"
 SOURCE_DIR="rpmbuild/SOURCES"
+RPMBUILD_OPTS=""
+VERSION=""
+VERSION_SPEC=""
 
 while getopts ":v:p:dblh" OPT; do
     case "${OPT}" in
@@ -89,8 +101,5 @@ if [ ${SOURCE_BUILD} ]; then
         mv ngx_openresty-${VERSION}.tar.gz ../${SOURCE_DIR}/.) || \
         die "Building source bundle failed."
 fi
-
-# cleanup
-(cd ngx_openresty && git checkout master && git branch -d v${VERSION})
 
 eval "QA_RPATHS=$[ 0x0002 ] rpmbuild --define '_topdir %(pwd)/rpmbuild' ${RPMBUILD_OPTS} -ba ${VERSION_SPEC}"
