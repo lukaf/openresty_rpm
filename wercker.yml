@@ -22,4 +22,4 @@ deploy:
       draft: true
     - github-upload-asset:
       token: $GITHUB_TOKEN
-      file: rpmbuild/RPMS/x86_64/ngx_openresty-${RELEASE_VERSION}-1.x86_64.rpm
+      file: rpmbuild/RPMS/x86_64/openresty-${RELEASE_VERSION}-1.x86_64.rpm
