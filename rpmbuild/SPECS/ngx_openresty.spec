@@ -4,7 +4,7 @@
 # conditionals --with and --without
 %bcond_with debug
 
-Name: ngx_openresty
+Name: openresty
 Version: %{openresty_version}
 Release: %{openresty_release}
 Summary: A fully-fledged web application server built using Nginx and 3rd-party modules.

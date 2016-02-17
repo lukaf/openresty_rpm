@@ -98,7 +98,7 @@ commit_history >> ${VERSION_SPEC}
 
 if [ ${SOURCE_BUILD} ]; then
     (cd ngx_openresty && make && \
-        mv ngx_openresty-${VERSION}.tar.gz ../${SOURCE_DIR}/.) || \
+        mv openresty-${VERSION}.tar.gz ../${SOURCE_DIR}/.) || \
         die "Building source bundle failed."
 fi
 
